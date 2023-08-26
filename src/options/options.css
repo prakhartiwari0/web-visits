@@ -1,0 +1,22 @@
+* {
+	/* border: 1px solid black; */
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+.eachLogDiv {
+	border: 1px solid black;
+
+	display: flex;
+	flex-direction: column;
+
+	margin: 1rem;
+}
+
+.logsContainer {
+	display: flex;
+	flex-direction: column;
+}

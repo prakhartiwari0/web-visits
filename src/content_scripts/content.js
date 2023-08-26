@@ -11,23 +11,6 @@ chrome.runtime.onMessage.addListener(
 );
 
 
-
-// document.addEventListener('keydown', function (event) {
-// // Preventing Escape key default dialog closing, and closing the dialog completely using function
-
-//     if (event.key === 'Escape') {
-//         event.preventDefault();
-//     if (document.querySelector('.visitPopupDialog')) {
-//         if (isModalOpen) {
-//                 closeModal()
-
-//             }
-
-//         }
-//     }
-// });
-
-
 function createAndAppendPopup() {
     // console.log('createAndAppendPopup');
     const popupDialog = document.createElement('dialog')
@@ -117,11 +100,6 @@ function saveVisit() {
     let visitURL = modal.querySelector('.visitURLSpan').getAttribute('data-visitURL')
     let visitDateTime = modal.querySelector('.visitDateTimeSpan').getAttribute('data-dateTime')
     let visitMessage = modal.querySelector('.visitMessageTextarea').value
-    // console.log(visitURL);
-    // console.log(visitDateTime);
-    // console.log(visitMessage);
-    // // console.log(modal.childNodes);
-
     const visitDataObject = {
         visitURL, visitDateTime, visitMessage
     }
