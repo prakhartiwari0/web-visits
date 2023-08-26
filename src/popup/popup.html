@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head> </head>
+	<body>
+		<h2>Web Visits</h2>
+
+		<button class="addVisitButton">+</button>
+
+		<dialog>
+			<h1>Add a new Visit</h1>
+
+			<input type="text" class="visitURLInput" />
+			<textarea
+				name="visitMessage"
+				id="visitMessage"
+				cols="30"
+				rows="10"
+				class="visitMessageTextarea"
+				placeholder="Write your Message here"></textarea>
+
+			<span class="textAreaCharacterCountSpan">
+				<span class="currentCharacters"> 0 </span>
+				/
+				<span class="totalCharactersAllowed"> 120 </span>
+			</span>
+
+			<button class="saveButton">Save</button>
+			<button class="closePopupButton">close</button>
+
+			<span class="visitDateTime">Visited: </span>
+		</dialog>
+	</body>
+	<script type="module" src="popup.js"></script>
+</html>
