@@ -1,51 +1,52 @@
 {
-    "manifest_version": 3,
-    "name": "0",
-    "version": "1.0",
-    "description": "Remember your visits on the Web",
-    "action": {
-        "default_icon": {
-            "16": "src/icons/icon.png",
-            "48": "src/icons/icon.png",
-            "128": "src/icons/icon.png"
-        },
-        "default_popup": "src/popup/popup.html"
+  "manifest_version": 3,
+  "name": "0",
+  "version": "1.0",
+  "description": "Remember your visits on the Web",
+  "action": {
+    "default_icon": {
+      "16": "src/icons/icon.png",
+      "48": "src/icons/icon.png",
+      "128": "src/icons/icon.png"
     },
-    "icons": {
-        "16": "src/icons/icon.png",
-        "48": "src/icons/icon.png",
-        "128": "src/icons/icon.png"
-    },
+    "default_popup": "src/popup/popup.html"
+  },
+  "icons": {
+    "16": "src/icons/icon.png",
+    "48": "src/icons/icon.png",
+    "128": "src/icons/icon.png"
+  },
   "content_scripts": [
-        {
-            "js": [
-                "src/content_scripts/content.js"
-            ],
-            "matches": [
-                "https://motherfuckingwebsite.com/*"
-            ]
-        }
-    ],
-    "background": {
-        "service_worker": "src/background/background.js",
-        "type": "module"
-    },
-    "commands": {
-        "openClosePopup": {
-            "suggested_key": {
-                "default": "Ctrl+Shift+K",
-                "mac": "Command+Shift+K"
-            },
-            "description": "Run the function"
-        }
-    },
-"options_page": "src/options/options.html",
-"permissions": [
+    {
+      "js": [
+        "src/content_scripts/content.js"
+      ],
+      "matches": [
+        "https://motherfuckingwebsite.com/*",
+        "https://www.google.com/*"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "src/background/background.js",
+    "type": "module"
+  },
+  "commands": {
+    "openClosePopup": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "Command+Shift+K"
+      },
+      "description": "Run the function"
+    }
+  },
+  "options_page": "src/options/options.html",
+  "permissions": [
     "storage",
     "activeTab",
     "tabs",
     "unlimitedStorage",
     "scripting",
     "contextMenus"
-]
+  ]
 }

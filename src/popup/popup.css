@@ -9,11 +9,34 @@ body{
 
     display: flex;
     flex-direction: column;
-
+    
     min-width: 300px;
     min-height: 500px;
+
+    
 }
 
+header{
+    display: flex;
+    flex-direction: row;
+
+    position: relative;
+    
+}
+
+.addVisitButton{
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 1rem;
+    height: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 

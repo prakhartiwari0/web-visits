@@ -19,9 +19,21 @@ async function togglePopup() {
 
 
 
-chrome.contextMenus.onClicked.addListener(() => {
-    togglePopup()
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+    if (info.menuItemId=='createWebVisit') {
+        console.log("popup menu bro");
+        togglePopup()
+    }
+    else if (info.menuItemId=='showLogsOfVisitedLink') {
+        console.log("Visit Link context menu bro");
+        showLogsOfVisitedLink(info.linkUrl)
+    }
 })
+
+function showLogsOfVisitedLink(link) {
+    console.log(link);
+    
+}
 
 
 
@@ -31,3 +43,20 @@ chrome.commands.onCommand.addListener(function (command) {
 })
 
 
+
+
+// Context Menu for visitedLinks
+
+chrome.contextMenus.create({
+    id: "showLogsOfVisitedLink",
+    title: "Show Visits",
+    contexts: ["link"],
+    enabled: false // Initially disabled
+});
+
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.enableMenuItem == true || message.enableMenuItem == false) {
+        chrome.contextMenus.update("showLogsOfVisitedLink", { enabled: message.enableMenuItem });
+    }
+});

@@ -4,7 +4,6 @@ import "./content.css"
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         if (request.action === "modalToggle") {
-            console.log("hii");
             modalToggle()
         }
     }
@@ -106,31 +105,96 @@ function saveVisit() {
 
 
     chrome.storage.local.get('visitsLog').then((result) => {
-        console.log(result);
-
+        // console.log(result);
 
         let logs = result.visitsLog ?? []
-        console.log('Old');
-        console.log(logs);
-
+        // console.log('Old');
+        // console.log(logs);
 
         logs.push({ visitDataObject })
-        console.log('New');
-        console.log(logs);
-
+        // console.log('New');
+        // console.log(logs);
 
         chrome.storage.local.set({ visitsLog: logs }).then(() => {
             console.log("Visit is Saved bro");
         });
-
-
-
+        
     })
+    
+    chrome.storage.local.get('visitedLinks').then((result) => {
+        console.log(result);
+
+        let links = result.visitedLinks ?? []
+        // console.log('Old');
+        // console.log(logs);
+
+        if (links.includes(visitURL)) {
+            return
+        }
+        links.push(visitURL)
+        // console.log('New');
+        // console.log(logs);
+
+        chrome.storage.local.set({ visitedLinks: links }).then(() => {
+            console.log("Link is Saved bro");
+        });
+        
+    })
+    
+            // chrome.storage.local.set({ visitedLinks: visitURL }).then(() => {
+            //     console.log("Link is Saved bro");
+            // });
+    
 
 
     closeModal(modal)
 
 }
+
+
+// Retrieve visited links array from storage
+chrome.storage.local.get("visitedLinks", (data) => {
+    const visitedLinks = data.visitedLinks || []; // Default to an empty array
+
+    // console.log(data);
+
+    // console.log(visitedLinks);
+
+    // Retrieve the preferred color from storage
+    chrome.storage.local.get("linkColor", (colorData) => {
+        const preferredColor = colorData.linkColor || "green"; // Default to green if not set
+
+        // Function to apply the color to specific links
+        function applyLinkColor() {
+            const links = document.getElementsByTagName("a");
+
+            
+            for (let link of links) {
+                console.log("Link frrr");
+
+                let linkHref = link.href;
+                
+                if (visitedLinks.includes(linkHref)) {
+                    console.log("MATCH FOUND!");
+                    chrome.runtime.sendMessage({ enableMenuItem: true });
+                    link.style.color = preferredColor;
+                }
+                else{
+                    chrome.runtime.sendMessage({ enableMenuItem: false });
+
+                }
+            }
+        }
+
+        // Apply the color when the page is fully loaded
+        window.addEventListener("load", applyLinkColor);
+
+        // Also apply the color on AJAX or dynamic content changes
+        const observer = new MutationObserver(applyLinkColor);
+        observer.observe(document.body, { childList: true, subtree: true });
+    });
+});
+
 
 
 function isModalOpen() {
