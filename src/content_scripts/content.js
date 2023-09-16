@@ -1,6 +1,5 @@
 import "./content.css"
 
-
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         if (request.action === "modalToggle") {
@@ -22,6 +21,22 @@ function createAndAppendPopup() {
     const currentPageUrl = window.location.href;
 
 
+
+// Search in settings for categories set by user and put them in the options of the select element
+
+    // chrome.storage.local.get('settings').then((result) => {
+
+    //     let logs = result.visitsLog ?? []
+
+    //     logs.push({ visitDataObject })
+
+
+    //     chrome.storage.local.set({ visitsLog: logs }).then(() => {
+    //         console.log("Visit is Saved bro");
+    //     });
+
+    // })
+
     const innerHTMLofPopup = ` 
     
     <button class="closePopupButton">X</button>
@@ -40,7 +55,16 @@ function createAndAppendPopup() {
 
       			<span class="textAreaCharacterCountSpan">
 			</span>
-
+    <select name="mainCategory" id="mainCategory">
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+    </select>
+    <select name="secondaryCategory" id="secondaryCategory">
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+    </select>
 
 	  <button class="saveButton">Save</button>
 
